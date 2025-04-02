@@ -778,22 +778,41 @@
     </div>
   </section>
 
+  
   <section class="contact" id="contact">
     <div class="contact-container">
       <h2 data-aos="fade-up" data-aos-duration="1000">Get In Touch</h2>
-      <form class="contact-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+      
+      <form class="contact-form" id="contact-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
         <div class="form-group">
-          <input type="text" placeholder="Your Name" required>
+          <input type="text" name="from_name" placeholder="Your Name" required>
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Your Email" required>
+          <input type="email" name="from_email" placeholder="Your Email" required>
         </div>
         <div class="form-group">
-          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         </div>
         <button type="submit" class="btn">Send Message</button>
       </form>
     </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      emailjs.init('BdMFDEAlTp-V0pE0z');
+      
+      document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        emailjs.sendForm('service_1p5at3s', 'template_s5fjm5k', this)
+          .then(function() {
+            alert('Message sent successfully!');
+            document.getElementById('contact-form').reset();
+          }, function(error) {
+            alert('Failed to send message: ' + JSON.stringify(error));
+          });
+      });
+    </script>
   </section>
 
   <footer>
